@@ -1,0 +1,53 @@
+# Workspace configuration for autojsons module
+name: autojsons
+version: 0.1.0
+description: A Python module for easy JSON file handling
+author: PlazmaDevelopment
+email: plazmadevacc@gmail.com
+license: MIT
+
+# Project structure
+structure:
+  source_dir: .
+  test_dir: tests
+  docs_dir: docs
+
+# Build configuration
+build:
+  package_name: autojsons
+  python_requires: '>=3.7'
+  include_package_data: true
+  package_data:
+    '': ['*.json', '*.yaml', '*.yml']
+
+# Development dependencies
+dev_dependencies:
+  - pytest>=6.0
+  - pytest-cov>=2.0
+  - black>=21.5b2
+  - isort>=5.8.0
+  - mypy>=0.812
+  - flake8>=3.9.0
+  - sphinx>=4.0.0
+  - sphinx-rtd-theme>=0.5.0
+
+# Documentation
+docs:
+  build_command: sphinx-build -b html docs/source docs/build
+  source_dir: docs/source
+  build_dir: docs/build
+
+# Testing
+test:
+  command: pytest tests/ -v --cov=autojsons --cov-report=term-missing
+  coverage:
+    report: term-missing
+    fail_under: 80
+
+# Release configuration
+release:
+  build_command: python -m build
+  publish_command: python -m twine upload dist/*
+  version_files:
+    - pyproject.toml
+    - autojsons/__init__.py
